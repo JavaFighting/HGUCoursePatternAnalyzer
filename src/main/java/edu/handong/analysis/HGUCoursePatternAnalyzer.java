@@ -5,7 +5,7 @@ import edu.handong.analysis.datamodel.Student;
 
 public class HGUCoursePatternAnalyzer {
 	
-	String[] lines = {	"1999-1, JC Nam, Java Programming",
+	private String[] lines = {	"1999-1, JC Nam, Java Programming",
 						"1999-2, JC Nam, Programming Language Theory",
 						"1999-1, JC Nam, Data Structures",
 						"2001-1, JC Nam, Database Systems",
@@ -19,10 +19,11 @@ public class HGUCoursePatternAnalyzer {
 						"2019-1, SJ Kim, Algorithm Analysis",
 						};
 
-	int numOfStudents;
-	int numOfCourses;
-	Student[] students;
-	Course[] courses;
+	private int numOfStudents;
+	private int numOfCourses;
+	private Student[] students;
+	private Course[] courses;
+
 	
 	/**
 	 * This method runs our analysis logic to get the list of student and course names from lines.
@@ -34,7 +35,6 @@ public class HGUCoursePatternAnalyzer {
 		numOfCourses = Integer.parseInt(args[1]);
 	
 		students = initiateStudentArrayFromLines(lines);
-		
 		System.out.println("Number of All Students: " + numOfStudents);
 		for(Student student: students) {
 			System.out.println(student.getName());
@@ -55,19 +55,25 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
 		
-		// TODO: implement this method
-		
+		students = new Student [lines.length];
+		// create variable of Student[] 
+			
+		for(int i=0; i<lines.length;i++) {
+			students[i]= new Student (lines[i].trim().split(",")[1]);  //students ดย array students[i]ดย class
+			//'=' must be same type
+		}
 		
 		return null;
 	}
 
 	/**
-	 * This method check if there is the same name of the second arugement in the array, students
+	 * This method check if there is the same name of the second argument in the array, students
 	 * @param students
 	 * @param student
 	 * @return boolean
 	 */
 	private boolean studentExist(Student[] students, Student student) {
+		
 		
 		// TODO: implement this method
 
@@ -81,8 +87,13 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
 		
-		// TODO: implement this method
+		String[] course=new String [lines.length];
 		
+		for(int i=0; i<lines.length;i++) {
+			course[i]=lines[i].trim().split(",")[2];
+		}
+		
+
 		return null;
 	}
 
