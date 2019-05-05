@@ -96,8 +96,10 @@ public class HGUCoursePatternAnalyzer {
 		// create variable of Student[] 
 			
 		for(int i=0; i<lines.length;i++) {
-			courses[i]= new Course (lines[i].trim().split(",")[2]);  
+			Course temp= new Course (lines[i].trim().split(",")[2]);  
+			if(!courseExist(courses,temp)) courses[i]= temp;
 		}
+		
 		
 		return courses;
 	}
@@ -110,9 +112,12 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private boolean courseExist(Course[] courses, Course course) {
 		
-		// TODO: implement this method
-
+		for(int i=0;i<students.length;i++) {
+			if((courses[i].getCourseName()).equals((course.getCourseName()))){
+				return true;
+				}
+			}
 		return false;
-	}
+		}
 
 }
