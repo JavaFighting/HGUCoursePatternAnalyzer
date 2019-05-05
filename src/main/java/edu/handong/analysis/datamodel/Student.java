@@ -4,8 +4,8 @@ public class Student {
 
 	private String name;
 	
-	public Student (String students) {
-		name=students;
+	public Student (String name) {
+		this.name=name;
 	}
 
 	public String getName() {

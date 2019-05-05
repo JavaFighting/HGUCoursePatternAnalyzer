@@ -2,6 +2,7 @@ package edu.handong.analysis;
 
 import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
+import java.util.*;
 
 public class HGUCoursePatternAnalyzer {
 	
@@ -23,14 +24,14 @@ public class HGUCoursePatternAnalyzer {
 	private int numOfCourses;
 	private Student[] students;
 	private Course[] courses;
-
 	
+
 	/**
 	 * This method runs our analysis logic to get the list of student and course names from lines.
 	 * @param args
 	 */
 	public void run(String[] args) {
-		
+				
 		numOfStudents = Integer.parseInt(args[0]);
 		numOfCourses = Integer.parseInt(args[1]);
 	
@@ -48,22 +49,25 @@ public class HGUCoursePatternAnalyzer {
 		
 	}
 
+	
 	/**
 	 * This method returns a Student array to initiate the field, students, from lines.
 	 * @param lines
 	 * @return
 	 */
-	private Student[] initiateStudentArrayFromLines(String[] lines) {
-		
+	private Student[] initiateStudentArrayFromLines(String[] lines) {			
 		students = new Student [lines.length];
 		// create variable of Student[] 
-			
+		
+
 		for(int i=0; i<lines.length;i++) {
-			students[i]= new Student (lines[i].trim().split(",")[1]);  //students 는 array students[i]는 class
+			Student temp = new Student (lines[i].trim().split(",")[1]);
+			
+			if(!studentExist(students,temp)) students[i]= temp;//students 는 array, students[i]는 class
 			//'=' must be same type
 		}
 		
-		return null;
+		return students;
 	}
 
 	/**
@@ -73,12 +77,13 @@ public class HGUCoursePatternAnalyzer {
 	 * @return boolean
 	 */
 	private boolean studentExist(Student[] students, Student student) {
-		
-		
-		// TODO: implement this method
-
+		for(int i=0;i<students.length;i++) {
+			if((students[i].getName()).equals((student.getName()))){
+				return true;
+				}
+			}
 		return false;
-	}
+		}
 	
 	/**
 	 * This method returns a Course array to initiate the field, courses, from lines.
@@ -87,14 +92,14 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
 		
-		String[] course=new String [lines.length];
-		
+		courses = new Course [lines.length];
+		// create variable of Student[] 
+			
 		for(int i=0; i<lines.length;i++) {
-			course[i]=lines[i].trim().split(",")[2];
+			courses[i]= new Course (lines[i].trim().split(",")[2]);  
 		}
 		
-
-		return null;
+		return courses;
 	}
 
 	/**
