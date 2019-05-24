@@ -1,5 +1,7 @@
 package edu.handong.analysis;
 
+import java.util.ArrayList;
+
 import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
 
@@ -21,8 +23,8 @@ public class HGUCoursePatternAnalyzer {
 
 	private int numOfStudents;
 	private int numOfCourses;
-	private Student[] students;
-	private Course[] courses;
+	private ArrayList <Student> students;
+	private ArrayList <Course> courses;
 	
 
 	/**
@@ -52,65 +54,71 @@ public class HGUCoursePatternAnalyzer {
 	 * @param lines
 	 * @return
 	 */
-	private Student[] initiateStudentArrayFromLines(String[] lines) {
-		Student numofstudent;
-		int count = 0;
-		students = new Student [numOfStudents];
-		for(int i=0; i<lines.length;i++) {
-			numofstudent = new Student (lines[i].trim().split(",")[1]);
-			if(!studentExist(students,numofstudent)) {
-				students[count++]= numofstudent;			
-				}
+	private ArrayList<Student> initiateStudentArrayFromLines(String[] lines) {
+		
+		ArrayList<Student> studentList = new ArrayList<Student>(0);
+		
+		for(String line : lines){
+			Student student = new Student(line.trim().split(", ")[1]);
+			if(!studentExist(studentList, student)){
+				studentList.add(student);
 			}
-		return students;
 		}
+		
+		return studentList;
+	}		
 		
 	
 
 	/**
 	 * This method check if there is the same name of the second argument in the array, students
-	 * @param students
+	 * @param students2
 	 * @param student
 	 * @return boolean
 	 */
-	private boolean studentExist(Student[] students, Student student) {
-		for(Student compare:students) {
-			if(compare!=null && student.getName().equals(compare.getName()))
+	private boolean studentExist(ArrayList<Student> students, Student student) {
+		for(Student aStudent:students) {
+			if(aStudent != null && aStudent.getName().equals(student.getName()))
 				return true;
-			}
-		return false;
 		}
+
+ 		return false;			
+ 		}
 	
 	/**
 	 * This method returns a Course array to initiate the field, courses, from lines.
 	 * @param lines
+	 * @param newCourse 
 	 * @return
 	 */
-	private Course[] initiateCourseArrayFromLines(String[] lines) {
-		Course numofcourse;
-		courses = new Course [numOfCourses];
-		int count = 0;
-		for(int i=0; i<lines.length;i++) {
-			numofcourse = new Course (lines[i].trim().split(",")[2]);
-			if(!courseExist(courses,numofcourse)) {
-				courses[count++]= numofcourse;
-				}
-			}
-		return courses;
+	private ArrayList<Course> initiateCourseArrayFromLines(String[] lines) {
+		
+		ArrayList<Course> courseList = new ArrayList<Course>(0);
+		
+		for(String line:lines) {
+			String courseName = line.split(",")[2].trim();
+			Course course = new Course(courseName);
+			if(!courseExist(courseList, course))
+				courseList.add(course);
 		}
+
+ 		return courseList;
+	}		
 
 	/**
 	 * This method check if there is the same name of the second argument in the array, courses.
-	 * @param courses
+	 * @param courses2
 	 * @param course
 	 * @return boolean
 	 */
-	private boolean courseExist(Course[] courses, Course course) {		
-		for(Course compare:courses) {
-			if(compare!=null && course.getCourseName().equals(compare.getCourseName()))
+	private boolean courseExist(ArrayList<Course> courses, Course course) {		
+		for(Course aCourse:courses) {
+			if(aCourse != null && aCourse.getCourseName().equals(course.getCourseName()))
 				return true;
-			}
-		return false;
 		}
 
-}
+ 		return false;
+		}		
+	}
+
+
